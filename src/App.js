@@ -10,8 +10,8 @@ function App() {
     <Router>
       <Navigation/>
       <div className='container p-4'>
-      <Route path="/categorias" components ={Createcategoria}/>
-      <Route path="/productos" components ={Createproductos}/>
+      <Route path="/categorias" component={props=><Createcategoria/>}/>
+      <Route path="/productos" component={props=><Createproductos/>}/>
       </div>
     </Router>
   );
