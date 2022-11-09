@@ -50,7 +50,7 @@ export default class Createproductos extends Component {
 
     deleteUser = async (id) => {
         await axios.delete('http://localhost:3000/productos/'+id)
-        this.productos();
+        this.getproductos();
      }
 
     render() {
