@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 
 export default class Createproductos extends Component {
     state = {
@@ -18,28 +18,29 @@ export default class Createproductos extends Component {
 
     }
 
-    onChangeName = (e)=>{
-        this.setState({name:e.target.value});
+    onChangeName = (e) => {
+        this.setState({ name: e.target.value });
     }
 
-    onChangePrice = (e)=>{
-        this.setState({_price:e.target.value});
+    onChangePrice = (e) => {
+        this.setState({ _price: e.target.value });
     }
-    onChangeDescription = (e)=>{
-        this.setState({_description:e.target.value});
+    onChangeDescription = (e) => {
+        this.setState({ _description: e.target.value });
     }
-    onClean = ()=>{
+    onClean = () => {
         this.state(
-         {name : '', _price:'', _description:''
-        }
+            {
+                name: '', _price: '', _description: ''
+            }
 
         );
     }
-    onSubmit =async (e) =>{
+    onSubmit = async (e) => {
         e.preventDefault();
         await axios.post('http://localhost:3000/productos/', {
             name: this.state.name,
-            price:this.state._price,
+            price: this.state._price,
             description: this.state._description
         }
         );
@@ -47,7 +48,10 @@ export default class Createproductos extends Component {
         this.onClean();
     }
 
-   
+    deleteUser = async (id) => {
+        await axios.delete('http://localhost:3000/productos/'+id)
+        this.productos();
+     }
 
     render() {
         return (
@@ -78,7 +82,7 @@ export default class Createproductos extends Component {
                                 <li
                                     className='list-group-item list-group-item-action'
                                     key={producto.id}
-                                   
+                                    onDoubleClick={()=>this.deleteUser(producto.id)}
                                 >
                                     {producto.name}
                                 </li>
